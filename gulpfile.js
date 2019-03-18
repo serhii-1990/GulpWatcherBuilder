@@ -27,6 +27,16 @@ gulp.task('sass', function() {
         .pipe(browserSync.reload({ stream: true })); // refresh css on the page
 });
 
+//Task for zipping libs JS
+gulp.task('zipLibs', function() {
+    return gulp.src([
+            'app/libs/jquery/dist/jquery.min.js',
+            'app/libs/magnific-popup/dist/jquery.magnific-popup.min.js'
+        ]).pipe(concat('libs.min.js'))
+        .pipe(uglify())
+        .pipe(gulp.dest('app/js'));
+});
+
 //Task for JS
 gulp.task('script', function() {
     return gulp.src(['app/js/common.js', 'app/libs/**/*.js'])
