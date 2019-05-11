@@ -20,7 +20,7 @@ gulp.task('sass', function() {
 
 //Task for zipping libs JS
 gulp.task('zipLibs', function() {
-    return gulp.src('app/libs/jquery/jquery.min.js')
+    return gulp.src('app/libs/*/*.js')
         .pipe(concat('libs.min.js'))
         .pipe(uglify())
         .pipe(gulp.dest('app/js'));
@@ -28,7 +28,7 @@ gulp.task('zipLibs', function() {
 
 //Task for JS
 gulp.task('script', function() {
-    return gulp.src(['app/js/common.js'])
+    return gulp.src(['app/js/*.js'])
         .pipe(browserSync.reload({ stream: true }));
 });
 
@@ -81,7 +81,7 @@ gulp.task('prebuild', async function() {
 gulp.task('watch', function() {
     gulp.watch('app/sass/**/*.scss', gulp.parallel('sass')); // watching by files .scss
     gulp.watch('app/*.html', gulp.parallel('code'));
-    gulp.watch(['app/js/common.js'], gulp.parallel('script'));
+    gulp.watch(['app/js/*.js'], gulp.parallel('script'));
 });
 
 gulp.task('default', gulp.parallel('sass', 'browser-sync', 'watch', 'zipLibs'));
